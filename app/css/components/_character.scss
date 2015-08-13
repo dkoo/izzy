@@ -1,0 +1,360 @@
+@mixin animation {
+	@keyframes bob {
+		0% {
+			transform: translate3d(0, 0, 0);
+		}
+		50% {
+			transform: translate3d(0, 0.05em ,0);
+		}
+	}
+	@keyframes bob-walk {
+		0% {
+			transform: translate3d(0, 0, 0);
+		}
+		25% {
+			transform: translate3d(0, 0.1em, 0);
+		}
+		50% {
+			transform: translate3d(0, 0, 0);
+		}
+		75% {
+			transform: translate3d(0, 0.1em, 0);
+		}
+		100% {
+			transform: translate3d(0, 0, 0);
+		}
+	}
+	@keyframes bob-head {
+		0% {
+			transform: rotate(10deg) translate3d(0, 0, 0);
+		}
+		25% {
+			transform: rotate(10deg) translate3d(0, 0.1em, 0);
+		}
+		50% {
+			transform: rotate(10deg) translate3d(0, -0.05em, 0);
+		}
+		75% {
+			transform: rotate(10deg) translate3d(0, 0.1em, 0);
+		}
+		100% {
+			transform: rotate(10deg) translate3d(0, 0, 0);
+		}
+	}
+	@keyframes blink {
+		0% {
+			height: 0.15em;
+		}
+		70% {
+			height: 0.15em;
+		}
+		75% {
+			height: 0.025em;
+		}
+		80% {
+			height: 0.15em;
+		}
+	}
+	@keyframes walk-front {
+		0% {
+			transform: rotate(0);
+		}
+		25% {
+			transform: rotate(-20deg);
+		}
+		50% {
+			transform: rotate(10deg);
+		}
+		75% {
+			transform: rotate(-20deg);
+		}
+		100% {
+			transform: rotate(10deg);
+		}
+	}
+	@keyframes walk-hind {
+		0% {
+			transform: rotate(0);
+		}
+		25% {
+			transform: rotate(20deg);
+		}
+		50% {
+			transform: rotate(-10deg);
+		}
+		75% {
+			transform: rotate(20deg);
+		}
+		100% {
+			transform: rotate(-10deg);
+		}
+	}
+}
+
+@mixin sheep {
+	position: absolute;
+	width: 2em;
+	height: 2em;
+	transform: rotateZ(45deg) translateZ(1px);
+	transform-origin: 75% 100%;
+	transition-property: top, left;
+	transition-timing-function: ease-in-out;
+	.legs {
+		height: 1.6em;
+		width: 1.25em;
+		span {
+			display: block;
+			background-color: black;
+			height: 0.5em;
+			width: 0.15em;
+			bottom: 0;
+			border-radius: 0.1em;
+			transform-origin: 0 0;
+			&::after {
+				content: '';
+				position: absolute;
+				display: block;
+				background-color: black;
+				height: 0.5em;
+				width: 0.15em;
+				border-radius: 0.1em;		
+				transition: transform 0.25s ease-in-out;					
+			}
+			&.hind {
+				margin-left: 0.25em;
+				bottom: 0.15em;
+				transform: rotate(-5deg);
+				&::after {
+					right: 0.15em;
+					transform: rotate(10deg);
+				}
+			}
+			&.front {
+				margin-left: 0.75em;
+				transform: rotate(-5deg);
+				&::after {
+					right: 0.15em;
+					transform: rotate(10deg);
+				}
+			}
+		}
+	}
+	span {
+		display: block;
+		position: absolute;
+		transition: all 0.25s ease-in-out;
+		&.tail {
+			background-color: white;
+			background-image: linear-gradient(to right, #ddd, #aaa);
+			position: absolute;
+			border-radius: 100%;
+			width: 0.375em;
+			height: 0.5em;
+			z-index: -1;
+			transition: margin 0.2s ease-in-out, z-index 0.2s ease-in-out;
+		}
+		&.body {
+			background-color: white;
+			background-image: linear-gradient(to right, white, #aaa);
+			width: 1.25em;
+			height: 1.25em;
+			border-radius: 75% 100%;
+			&::after {
+				content: '';
+				display: block;
+				position: absolute;
+				z-index: -1;
+				background-color: black;
+				filter: blur(0.05em);
+				border-radius: 100%;
+				width: 100%;
+				height: 40%;
+				opacity: 0.375;
+				bottom: -0.5em;
+				transform: rotate(10deg);
+				transition: all 0.25s ease-in-out;
+			}
+		}
+		&.head {
+			background-color: black;
+			width: 0.75em;
+			height: 1em;
+			border-radius: 100%;
+			margin-top: 0.25em;
+			margin-left: 0.75em;
+			transform: rotate(10deg);
+			&::after { // muzzle
+				content: '';
+				position: absolute;
+				background-color: black;
+				width: 0.75em;
+				height: 0.75em;
+				border-radius: 100%;
+				bottom: 0;
+				margin-left: 0.15em;
+				z-index: -1;
+				transition: all 0.25s ease-in-out;
+			}
+			.eye {
+				background-color: white;
+				width: 0.1em;
+				height: 0.15em;
+				border-radius: 100%;
+				animation: blink 5s infinite;
+				&.left {
+					top: 0.35em;
+					margin-left: 0.5em;
+				}
+				&.right {
+					top: 0.35em;
+					margin-left: 0.25em;
+				}
+			}
+			.ear {
+				background-color: black;
+				border-radius: 100%;
+				width: 0.25em;
+				height: 0.375em;
+				&.left {
+					left: -0.1em;
+					top: 0.1em;
+				}
+				&.right {
+					right: -0.1em;
+					top: 0.1em;
+				}
+			}
+		}
+	}
+	&.west {
+		.tail {
+			margin-left: 1.25em;
+		}
+		.body {
+			margin-left: 0.375em;
+			&::after {
+				transform: rotate(-10deg);
+			}
+		}
+		.head {
+			margin-left: 0;
+			.eye.left {
+				margin-left: 0.375em;
+			}
+			.eye.right {
+				margin-left: 0.15em;
+			}
+			&::after {
+				margin-left: 0;
+			}
+		}
+		.legs .front {
+			margin-left: 0.65em;
+			transform: rotate(5deg)
+		}
+		.legs .hind {
+			margin-left: 1.25em;
+			transform: rotate(-10deg);
+		}
+	}
+	&.east {
+		.tail {
+			margin-left: 0.15em;
+			margin-top: 0.25em;
+			z-index: 1;
+		}
+		.body {
+			border-radius: 100% 100%;
+			transform: rotate(-15deg);
+			&::after {
+				height: 40%;
+			}
+		}
+		.head {
+			margin-top: 0;
+			z-index: -1;
+			.eye.left,
+			.eye.right {
+				margin-left: 0.75em;
+				opacity: 0;
+			}
+		}
+		.legs .front {
+			bottom: 0.15em;
+			margin-left: 0.875em;
+		}
+		.legs .hind {
+			bottom: 0.05em;
+			margin-left: 0.3em;
+		}
+	}
+	&.north {
+		.tail {
+			margin-left: 1em;
+			margin-top: 0.25em;
+			z-index: 1;
+		}
+		.body {
+			margin-left: 0.375em;
+			border-radius: 100% 100%;
+			transform: rotate(15deg);
+			&::after {
+				transform: rotate(-10deg);
+				margin-left: 0.15em;
+				height: 40%;
+			}
+		}
+		.head {
+			margin: 0;
+			z-index: -1;
+			.eye.left,
+			.eye.right {
+				margin: 0;
+				opacity: 0;
+			}
+			&::after {
+				margin-left: 0;
+			}
+		}
+		.legs .front {
+			margin-left: 0.65em;
+			bottom: 0.15em;
+			transform: rotate(5deg)
+		}
+		.legs .hind {
+			margin-left: 1.15em;
+			bottom: 0.05em;
+			transform: rotate(-10deg);
+		}
+	}
+	&.idle {
+		.top {
+			animation: bob 1s infinite;
+		}
+		&:hover {
+			.top {
+				animation-play-state: paused;
+				.head {
+					transform: rotate(25deg);
+				}
+			}
+		}
+	}
+	&.walking {
+		.top {
+			animation: bob-walk 1s infinite;
+			.head,
+			.tail {
+				animation: bob-head 1s infinite;
+			}
+		}
+		.legs {
+			.front {
+				animation: walk-front 1s infinite;
+			}
+			.hind {
+				animation: walk-hind 1s infinite;
+			}
+		}
+	}
+}

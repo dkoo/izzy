@@ -52,6 +52,7 @@ gulp.task('watch', function() {
 	gulp.watch('./app/css/**/*.scss', ['sass']);
 	gulp.watch('./build/css/**/*.css', ['autoprefix']);
 	gulp.watch('./app/js/**/*.js', ['lint']);
+	gulp.watch('./app/js/**/*.js', ['browserify']);
 });
 
 /* build js */

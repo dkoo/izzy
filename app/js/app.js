@@ -1,5 +1,13 @@
-// define dependencies
-var component = require('./modules/component.js');
+(function () {
+	// define dependencies
+	var config = require('./modules/config.js'),
+		izzy = require('./modules/izzy.js'),
 
-// get it started
-component.init('sup, this is working');
+		// globalish vars
+		transitionEnd = config.getTransitionEndEvent(),
+		touch = config.getTouchEvents(),
+		grid = document.getElementById('grid');
+
+	// get it started
+	grid.addEventListener(touch.down, izzy.getDestinationCoords);
+})();

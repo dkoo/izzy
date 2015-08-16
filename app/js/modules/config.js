@@ -1,7 +1,7 @@
 var config = {
 	getTransitionEndEvent: function () {
 		var t,
-			el = document.createElement('fakeelement'),
+			el = document.documentElement,
 			transitions = {
 				'transition':'transitionend',
 				'OTransition':'oTransitionEnd',
@@ -17,7 +17,7 @@ var config = {
 	},
 	getTransformProperty: function() {
 		var t,
-			el = document.createElement('fakeelement'),
+			el = document.documentElement,
 			transforms = {
 				'transform':'transform',
 				'OTransform':'OTransform',
@@ -28,6 +28,22 @@ var config = {
 		for ( t in transforms ) {
 			if( el.style[t] !== undefined ) {
 				return transforms[t];
+			}
+		}
+	},
+	getTransitionDuration: function() {
+		var t,
+			el = document.documentElement,
+			duration = {
+				'transitionDuration':'transitionDuration',
+				'OTransitionDuration':'transitionDuration',
+				'MozTransitionDuration':'transitionDuration',
+				'WebkitTransitionDuration':'WebkitTransitionDuration'
+			};
+
+		for ( t in duration ) {
+			if( el.style[t] !== undefined ) {
+				return duration[t];
 			}
 		}
 	},

@@ -97,7 +97,7 @@
 	height: 2em;
 	transform: rotateZ(45deg);
 	transform-origin: 75% 100%;
-	transition-property: top, left;
+	transition-property: all;
 	transition-timing-function: ease-in-out;
 	.legs {
 		height: 1.6em;

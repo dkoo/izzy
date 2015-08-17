@@ -6,7 +6,7 @@ var config = {
 				'transition':'transitionend',
 				'OTransition':'oTransitionEnd',
 				'MozTransition':'transitionend',
-				'WebkitTransition':'WebkitTransitionEnd'
+				'WebkitTransition':'webkitTransitionEnd'
 			};
 
 		for ( t in transitions ) {

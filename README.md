@@ -5,7 +5,7 @@ Izzy is a fat little sheep living in a 2.5-dimensionial sandbox (or grassbox). S
 * clone this repository
 * `cd izzy`
 * `npm install`
-* `gulp` to watch for SCSS/JS changes and recompile
+* `gulp build` to compile JS and CSS or `gulp` to watch for SCSS/JS changes
 * view index.html in a browser to play with her
 
 Things she can do:

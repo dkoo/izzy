@@ -56,7 +56,7 @@ gulp.task('watch', function() {
 });
 
 /* build js */
-gulp.task('js', ['lint', 'browserify']);
+gulp.task('build', ['sass', 'autoprefix', 'lint', 'browserify']);
 
 /* default gulp task */
 gulp.task('default', ['watch']);

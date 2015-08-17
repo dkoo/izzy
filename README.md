@@ -1,6 +1,6 @@
 # izzy
 
-Izzy is a fat little sheep living in 2.5 dimensions. Things she can do:
+Izzy is a fat little sheep living in 2.5-dimensionial sandbox (or grassbox). Things she can do:
 
 * walk in any direction
 

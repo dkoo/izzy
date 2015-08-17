@@ -1,6 +1,6 @@
 # izzy
 
-Izzy is a fat little sheep living in 2.5-dimensionial sandbox (or grassbox). To install her:
+Izzy is a fat little sheep living in 2.5-dimensionial sandbox (or grassbox). She hopes to one day become the main character in her own DOM-based game. To install her:
 
 * clone this repository
 * `cd izzy`

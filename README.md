@@ -10,4 +10,4 @@ Things she can’t do (yet):
 * talk with anyone
 * eat anything
 
-Izzy doesn’t work in every browser.
+Izzy doesn’t work in every browser. Try Chrome if she’s not behaving.

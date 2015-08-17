@@ -58,6 +58,8 @@ var izzy = {
 		if ( e.target.tagName.toLowerCase() === 'div' ) {
 			// initiate the move
 			izzy.move(e.offsetX - 50, e.offsetY - 50);
+		} else {
+			self.className = 'idle south';
 		}
 	},
 	init: function() {

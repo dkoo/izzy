@@ -11,7 +11,7 @@ var izzy = {
 	move: function(x, y) {
 		var moveCommand = 'translate3d(' + x + 'px, '+ y + 'px, 0) rotateZ(45deg) ',
 			distanceX = Math.floor(x - this.currentCoords[0]),
-			distanceY = Math.floor(y - izzy.currentCoords[1]),
+			distanceY = Math.floor(y - this.currentCoords[1]),
 
 			// thanks, pythagoras
 			distance = Math.floor(Math.sqrt(Math.pow(distanceX, 2) + Math.pow(distanceY, 2))),
@@ -67,4 +67,4 @@ var izzy = {
 	}
 };
 
-module.exports = izzy;
+module.exports = izzy.init();

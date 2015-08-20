@@ -13,7 +13,11 @@ main {
 
 #grid {
 	background: forestgreen;
-	margin: auto;
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -5em auto auto -5em;
 	width: 10em;
 	height: 10em;
 	transform: rotateX(45deg) rotateZ(-45deg);

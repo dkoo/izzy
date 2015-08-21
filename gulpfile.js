@@ -1,6 +1,6 @@
 /* gulpfile
 *
-* $ npm install gulp browserify vinyl-source-stream vinyl-buffer gulp-uglify gulp-jshint jshint-stylish gulp-sass gulp-autoprefixer --save-dev
+* $ npm install gulp browserify vinyl-source-stream vinyl-buffer gulp-uglify gulp-jshint jshint-stylish gulp-sass gulp-autoprefixer http st --save-dev
 *
 */
 
@@ -11,7 +11,9 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	jshint = require('gulp-jshint'),
 	sass = require('gulp-sass'),
-	autoprefixer = require('gulp-autoprefixer');
+	autoprefixer = require('gulp-autoprefixer'),
+	http = require('http'),
+	st = require('st');
 
 /* lint js files */
 gulp.task('lint', function() {
@@ -21,7 +23,7 @@ gulp.task('lint', function() {
 });
 
 /* bundle js modules */
-gulp.task('browserify', function() {
+gulp.task('browserify', ['lint'], function() {
 	return browserify('./app/js/app.js')
 		.bundle()
 		.pipe(source('app.js'))
@@ -38,7 +40,7 @@ gulp.task('sass', function() {
 });
 
 /* post-process CSS with autoprefixer */
-gulp.task('autoprefix', function() {
+gulp.task('autoprefix', ['sass'], function() {
 	return gulp.src('./build/css/unprefixed/styles.css')
 		.pipe(autoprefixer({
 			browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1'],
@@ -47,16 +49,25 @@ gulp.task('autoprefix', function() {
 		.pipe(gulp.dest('./dist/css/'));
 });
 
-/* watch files for changes and execute tasks */
-gulp.task('watch', function() {
-	gulp.watch('./app/css/**/*.scss', ['sass']);
-	gulp.watch('./build/css/**/*.css', ['autoprefix']);
-	gulp.watch('./app/js/**/*.js', ['lint']);
-	gulp.watch('./app/js/**/*.js', ['browserify']);
+/* build js */
+gulp.task('js', ['lint', 'browserify']);
+
+/* build everything */
+gulp.task('build', ['sass', 'autoprefix', 'js']);
+
+/* create a simple http server at localhost:8080 */
+gulp.task('server', function(done) {
+	http.createServer(
+		st({ path: __dirname + '/', index: 'index.html', cache: false })
+	).listen(8080, done);
 });
 
-/* build js */
-gulp.task('build', ['sass', 'autoprefix', 'lint', 'browserify']);
+/* watch files for changes and execute tasks */
+gulp.task('watch', ['server'], function() {
+	gulp.watch('./app/css/**/*.scss', ['sass']);
+	gulp.watch('./build/css/**/*.css', ['autoprefix']);
+	gulp.watch('./app/js/**/*.js', ['js']);
+});
 
 /* default gulp task */
 gulp.task('default', ['watch']);
